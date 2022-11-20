@@ -1,0 +1,40 @@
+button:
+  about: About
+  back: Back
+  go: GO
+  home: Home
+  toggle_dark: Toggle dark mode
+  toggle_langs: Change languages
+  exit: Exit
+  search: Search
+
+intro:
+  desc: Opinionated Vite Starter Template
+  dynamic-route: Demo of dynamic route
+  hi: Hi, {name}!
+  aka: Also known as
+  whats-your-name: What's your name?
+not-found: Not found
+
+
+route:
+  permission:
+    test: Test
+    about: About
+  other: Other
+  not-found: Not found
+  unauthorized: Unauthorized
+  home: Home
+
+user:
+  username: Username
+  email: Email
+  roles: Roles
+  createAt: CreateAt
+  phone: Phone
+  country: Country
+  city: City
+  followers: Followers
+  following: Following
+
+

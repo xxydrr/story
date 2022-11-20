@@ -1,0 +1,38 @@
+button:
+  about: 关于
+  back: 返回
+  go: 确定
+  home: 首页
+  toggle_dark: 切换深色模式
+  toggle_langs: 切换语言
+  exit: 退出
+  search: 查询
+intro:
+  desc: 固执己见的 Vite 项目模板
+  dynamic-route: 动态路由演示
+  hi: 你好，{name}
+  aka: 也叫
+  whats-your-name: 输入你的名字
+not-found: 未找到页面
+
+
+route:
+  permission:
+    test: 测试
+    about: 关于
+  other: 其它
+  not-found: 未发现
+  unauthorized: 未认证
+  home: 首页
+
+user:
+  username: 用户名
+  email: 邮箱
+  roles: 角色
+  createAt: 创建时间
+  phone: 手机号码
+  country: 国际
+  city: 城市
+  followers: 订阅人数
+  following: 关注人数
+

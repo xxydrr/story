@@ -1,0 +1,13 @@
+node_modules
+.DS_Store
+.vscode
+yarn.lock
+package-lock.json
+albums-migrations
+# Ignore built ts files
+dist/**/*
+# Logging files
+*.log
+*.pyc
+
+.local

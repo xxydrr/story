@@ -1,0 +1,6 @@
+html,
+body,
+#root {
+  height: 100%;
+  background-color: rgba(249, 250, 251);
+}

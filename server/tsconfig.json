@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "module": "commonjs",
+    "target": "ESNext",
+    "lib": ["ESNext"],
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "noUnusedLocals": true,
+    "strictNullChecks": true,
+    "forceConsistentCasingInFileNames": true,
+    "paths": {
+      "~/*": ["src/*"],
+      "~/#": ["typings/*"]
+    },
+    "outDir": "dist"
+  },
+  "include": [
+    "src/**/*",
+    "typings/**/*.d.ts",
+    "typings/**/*.ts"
+  ],
+  "exclude": ["node_modules", "tests", "**/*.js"]
+}
