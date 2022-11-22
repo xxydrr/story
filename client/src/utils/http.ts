@@ -45,7 +45,6 @@ instance.interceptors.response.use(
   (error) => {
     const messages = error.response?.data?.message
     if (error.response.status === 401) {
-      message.error(messages || 'Error')
       removeToken()
       const dispatch = useAuthDispatch()
       dispatch({ type: 'LOGOUT' })

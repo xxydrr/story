@@ -1,7 +1,9 @@
 import type { ReactNode } from 'react'
 import { createContext, useContext, useEffect, useReducer } from 'react'
+import { message } from 'antd'
 import { getToken, removeToken } from '~/utils/auth'
 import { axiosGet } from '~/utils/http'
+
 export interface IUser {
   username: string
   email: string
@@ -29,12 +31,12 @@ interface AuthState {
 }
 
 type Action =
-| { type: 'SET_REDIRECT_PATH'; payload: string }
+  | { type: 'SET_REDIRECT_PATH'; payload: string }
 
-| { type: 'LOGIN_SUCCESS'; payload: User }
-| { type: 'POPULATE'; payload: User }
-| { type: 'LOGOUT' }
-| { type: 'STOP_LOADING' }
+  | { type: 'LOGIN_SUCCESS'; payload: User }
+  | { type: 'POPULATE'; payload: User }
+  | { type: 'LOGOUT' }
+  | { type: 'STOP_LOADING' }
 type Dispatch = React.Dispatch<Action>
 
 const initState: AuthState = {
@@ -45,7 +47,7 @@ const initState: AuthState = {
 }
 
 export const StateContext = createContext<AuthState>(initState)
-const DispatchContext = createContext((() => {}) as Dispatch)
+const DispatchContext = createContext((() => { }) as Dispatch)
 
 const AuthReducer = (state: AuthState, action: Action): AuthState => {
   switch (action.type) {
@@ -78,12 +80,15 @@ const AuthReducer = (state: AuthState, action: Action): AuthState => {
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = useReducer(AuthReducer, initState)
-
   useEffect(() => {
     if (state.authenticated && !state.user) {
-      axiosGet<IUser>('/user')
+      axiosGet<IUser>('/user/')
         .then((res) => {
           dispatch({ type: 'LOGIN_SUCCESS', payload: res })
+        }).catch((e) => {
+          dispatch({ type: 'LOGOUT' })
+          message.error(e.message)
+          location.href = '/login'
         })
     }
   }, [])

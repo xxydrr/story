@@ -46,7 +46,7 @@ const TopBar: FC = () => {
       <div className="bg-white shadow">
         <div className="container flex flex-col items-center mx-auto lg:flex-row lg:relative">
           <div className="w-full lg:w-1/4">
-            <img src={user?.avatar} alt="logo" className="w-32 h-32 rounded-full lg:absolute lg:pin-l lg:pin-t lg:-mt-24" />
+            <img loading="lazy" src={user?.avatar} alt="logo" className="w-32 h-32 rounded-full lg:absolute lg:pin-l lg:pin-t lg:-mt-24" />
           </div>
           <div className="w-full lg:w-1/2">
             <ul className="flex list-reset">
@@ -60,7 +60,7 @@ const TopBar: FC = () => {
               <li className="px-4 py-3 text-center border-b-2 border-transparent border-solid hover:border-teal">
                 <div onClick={e => showModal(e, 'following')} className="no-underline cursor-pointer text-grey-darker">
                   <div className="mb-1 text-sm font-bold tracking-tight">Following</div>
-                  <div className="text-lg font-bold tracking-tight hover:text-teal">{ user?.followings!.length }</div>
+                  <div className="text-lg font-bold tracking-tight hover:text-teal">{user?.followings!.length}</div>
                 </div>
               </li>
               <li className="px-4 py-3 text-center border-b-2 border-transparent border-solid hover:border-teal">
@@ -88,7 +88,7 @@ const TopBar: FC = () => {
             ? ('Loading...')
             : error || (
               following && following.map(user => (
-                  <RecommendUser key={user._id} user={user}></RecommendUser>
+                <RecommendUser key={user._id} user={user}></RecommendUser>
               ))
             )
           }

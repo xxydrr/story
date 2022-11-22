@@ -1,8 +1,9 @@
 import NProgress from 'nprogress'
-
+import 'nprogress/nprogress.css'
 import router from '.'
 import { getToken } from '~/utils/auth'
 const whiteList = ['/login']
+NProgress.configure({ showSpinner: false })
 
 router.beforeEach(async (to, from, next) => {
   if (to.path !== from.path)

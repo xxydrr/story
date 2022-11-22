@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom'
 import type { Count, IComment, IPost } from '../../types'
 import { useAuthState } from '~/context/AuthContext'
 import { useLikesState } from '~/context/LikesContext'
-
 import { axiosGet, axiosPost, axiosPut } from '~/utils/http'
 
 export interface PostProps {
@@ -79,18 +78,18 @@ const Post: FC<PostProps> = ({ post }) => {
     <div key={post._id} className="flex flex-col p-4 mt-8 border-b border-solid rounded-lg shadow border-grey-light">
       <div className="flex items-center justify-start">
         <Link to={`/${post.username}`} >
-          <img className="object-cover rounded-full w-9 h-9" src={post.avatar} alt="Profile pic" />
+          <img loading="lazy" className="object-cover rounded-full w-9 h-9" src={post.avatar} alt="Profile pic" />
         </Link>
 
         <div className="ml-2">
           <Link to={`/${post.username}`} className="block mb-0 text-gray-800">{post.username}</Link>
 
-          <span className="text-xs text-gray-500">{format(post.createdAt as Date) }</span>
+          <span className="text-xs text-gray-500">{format(post.createdAt as Date)}</span>
         </div>
       </div>
       <div >
         <p className="mx-0 my-5 ">{post.title}</p>
-        {post.type === 'image' && <img src={post.content} alt="tweet image" className="object-cover w-full border border-solid rounded-sm border-grey-light max-h-96" />}
+        {post.type === 'image' && <img loading="lazy" src={post.content} alt="tweet image" className="object-cover w-full border border-solid rounded-sm border-grey-light max-h-96" />}
         {post.type === 'video' && <div className="relative flex flex-col items-center justify-center h-screen px-3 py-0 text-center text-white lg:max-h-96">
           <div className="absolute top-0 left-0 w-full h-full overflow-hidden video-docker">
             <video ref={videoRef} className="absolute object-cover min-w-full min-h-full" autoPlay muted loop>
@@ -118,9 +117,9 @@ const Post: FC<PostProps> = ({ post }) => {
             <input ref={inputRef} className="w-full px-3 border h-9 rounded-2xl" placeholder="input search loading with enterButton" maxLength={120} />
 
           </div>
-        <Button type="primary" shape="round" onClick={addComment} >comment</Button>
+          <Button type="primary" shape="round" onClick={addComment} >comment</Button>
         </div>)
-    }
+      }
       {
         showComment && comments && comments.map((comment, index) => (
           <Comment
@@ -129,11 +128,11 @@ const Post: FC<PostProps> = ({ post }) => {
             avatar={<Avatar src={comment.avatar} />}
             content={
               <p>
-              {comment.content}
+                {comment.content}
               </p>
             }
             datetime={
-                <span>{format(comment.createdAt as Date)}</span>
+              <span>{format(comment.createdAt as Date)}</span>
             }
           />
         ))
