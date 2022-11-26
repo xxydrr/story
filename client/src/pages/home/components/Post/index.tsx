@@ -4,11 +4,11 @@ import type { FC } from 'react'
 import { useEffect, useRef, useState } from 'react'
 import { format } from 'timeago.js'
 import { Link } from 'react-router-dom'
+import { debounce } from 'lodash'
 import type { Count, IComment, IPost } from '../../types'
 import { useAuthState } from '~/context/AuthContext'
 import { useLikesState } from '~/context/LikesContext'
 import { axiosGet, axiosPost, axiosPut } from '~/utils/http'
-
 export interface PostProps {
   post: IPost
 }
@@ -39,18 +39,20 @@ const Post: FC<PostProps> = ({ post }) => {
   const handleComment = async () => {
     setShowComment(!showComment)
   }
-  const handleLike = async (e: any, id: string) => {
-    try {
-      await axiosPut(`/like/${id}/`)
-      setLikes(isLiked ? likes - 1 : likes + 1)
-      setIsLiked(!isLiked)
-      const count = contextLikes
-      likesHandler(isLiked ? count - 1 : count + 1)
+  const handleLike = debounce(
+    async (e: any, id: string) => {
+      try {
+        await axiosPut(`/like/${id}/`)
+        setLikes(isLiked ? likes - 1 : likes + 1)
+        setIsLiked(!isLiked)
+        const count = contextLikes
+        likesHandler(isLiked ? count - 1 : count + 1)
+      }
+      catch (err) {
+        // do nothing
+      }
     }
-    catch (err) {
-      // do nothing
-    }
-  }
+    , 500)
   const addComment = async (e: any) => {
     e.preventDefault()
     try {
