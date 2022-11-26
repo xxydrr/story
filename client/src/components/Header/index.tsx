@@ -88,8 +88,6 @@ const Header: FC = () => {
         </nav>
 
         <div className="flex items-center justify-end gap-2 1/5">
-          <Link className="px-6 py-2 text-sm font-bold text-gray-900 bg-gray-100 hover:text-white lg:mr-3 rounded-xl hover:bg-blue-600 hover:no-underline"
-            to="/login">Login</Link>
           <div className="relative">
             <div className="flex items-center justify-center mx-2 bg-gray-100 rounded-full w-9 h-9" onClick={showSubmenu} ><CaretDownOutlined /></div>
 
