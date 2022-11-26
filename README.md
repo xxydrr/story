@@ -28,6 +28,7 @@
 
 + Client 
   + [react18](https://github.com/facebook/react), TypeScript, **[tailwindcss](https://github.com/tailwindlabs/tailwindcss)**, [Vite3 ](https://github.com/vitejs/vite), [pnpm](https://pnpm.js.org/)
+  + Responsive
 + Admin
   +  [Vue 3](https://github.com/vuejs/core),, TypeScript, [UnoCSS](https://github.com/antfu/unocss),  [Vite 3](https://github.com/vitejs/vite),  [pnpm](https://pnpm.io/)
 + Server
@@ -37,7 +38,11 @@
 
 ## Getting started
 
+[sever](https://github.com/xxydrr/story/blob/main/server)
 
+[client](https://github.com/xxydrr/story/tree/main/client)
+
+[admin](https://github.com/xxydrr/story/tree/main/admin)
 
 ## Reference Material
 
