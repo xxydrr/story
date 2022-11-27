@@ -20,11 +20,11 @@ const nextPage = (val: { page: number; limit: number }) => {
 }
 const formList = reactive<FormItem[]>([
   {
-    label: '用户名',
+    label: 'username',
     key: 'username',
     value: '',
     name: 'input',
-    placeholder: '请输入用户名',
+    placeholder: 'please input username',
   },
 
 ])
