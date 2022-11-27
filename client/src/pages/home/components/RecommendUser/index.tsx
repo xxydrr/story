@@ -2,31 +2,27 @@ import type { FC } from 'react'
 import { Button } from 'antd'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
-import { axiosPatch } from '~/utils/http'
-import { useAuthDispatch, useAuthState } from '~/context/AuthContext'
-
-export interface User {
-  _id: string
-  username: string
-  avatar: string
-}
+import type { User } from '../../types'
+import { axiosDelete, axiosPost } from '~/utils/http'
+import { useRelationshipState } from '~/context/RelationshipContext'
 
 export interface RecommendUserProps {
   user: User
+  isFollowing: boolean
 }
 
-const RecommendUser: FC<RecommendUserProps> = ({ user }) => {
-  const dispatch = useAuthDispatch()
-  const { user: currentUser } = useAuthState()
-  const [followed, setFollowed] = useState(false)
+const RecommendUser: FC<RecommendUserProps> = ({ user, isFollowing = false }) => {
+  const { setFollowings, followings: contextFollowings } = useRelationshipState()
+  const [followed, setFollowed] = useState(isFollowing)
   const [loading, setLoading] = useState(false)
   const handleFollow = async (e: any) => {
     e.preventDefault()
     setLoading(true)
     try {
-      await axiosPatch(`/user/${user._id}/follow`)
+      await axiosPost(`/relationship/follow/${user._id}`)
       setFollowed(true)
-      dispatch({ type: 'LOGIN_SUCCESS', payload: { ...currentUser, followings: [...currentUser?.followings as Array<string>, user._id] } })
+      const count = contextFollowings
+      setFollowings(count + 1)
     }
     catch (error) {
       // do nothing
@@ -38,9 +34,10 @@ const RecommendUser: FC<RecommendUserProps> = ({ user }) => {
     setLoading(true)
 
     try {
-      await axiosPatch(`/user/${user._id}/unfollow`)
+      await axiosDelete(`/relationship/unfollow/${user._id}`)
       setFollowed(false)
-      dispatch({ type: 'LOGIN_SUCCESS', payload: { ...currentUser, followings: currentUser!.followings!.filter(f => f !== user._id) } })
+      const count = contextFollowings
+      setFollowings(count - 1)
     }
     catch (error) {
       // do nothing

@@ -59,14 +59,6 @@ const fields = computed(() => {
       label: t('user.city'),
       prop: 'city',
     },
-    {
-      label: t('user.followers'),
-      prop: 'followers',
-    },
-    {
-      label: t('user.following'),
-      prop: 'following',
-    },
 
   ]
 })

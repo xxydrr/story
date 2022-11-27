@@ -7,14 +7,14 @@ import { Link } from 'react-router-dom'
 import { debounce } from 'lodash'
 import type { Count, IComment, IPost } from '../../types'
 import { useAuthState } from '~/context/AuthContext'
-import { useLikesState } from '~/context/LikesContext'
+import { useRelationshipState } from '~/context/RelationshipContext'
 import { axiosGet, axiosPost, axiosPut } from '~/utils/http'
 export interface PostProps {
   post: IPost
 }
 
 const Post: FC<PostProps> = ({ post }) => {
-  const { likesHandler, likes: contextLikes } = useLikesState()
+  const { setLikes: contextSetLikes, likes: contextLikes } = useRelationshipState()
   const { user } = useAuthState()
   const [showComment, setShowComment] = useState(false)
   const [likes, setLikes] = useState(0)
@@ -46,7 +46,7 @@ const Post: FC<PostProps> = ({ post }) => {
         setLikes(isLiked ? likes - 1 : likes + 1)
         setIsLiked(!isLiked)
         const count = contextLikes
-        likesHandler(isLiked ? count - 1 : count + 1)
+        contextSetLikes(isLiked ? count - 1 : count + 1)
       }
       catch (err) {
         // do nothing

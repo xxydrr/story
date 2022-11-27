@@ -58,19 +58,6 @@ export const getPostsCount = async (ctx: Context) => {
   ctx.responseSuccess({ count })
 }
 
-// get timeline posts
-export const getTimelinePosts = async (ctx: Context) => {
-  const currentUser = await User.findById(ctx.state.params.id)
-  const userPosts = await Post.find({ userId: currentUser?._id })
-  const friendPosts = await Promise.all(
-    currentUser!.followings!.map((friendId) => {
-      return Post.find({ userId: friendId })
-    }),
-  )
-  const posts = [...userPosts, ...friendPosts]
-  ctx.responseSuccess(posts)
-}
-
 // get random posts
 export const getRandomPosts = async (ctx: Context) => {
   const posts = await Post.aggregate([{ $sample: { size: 10 } }])

@@ -10,15 +10,12 @@ export interface IUser {
   phone: string
   avatar: string
   isAdmin: boolean
-  followers: string[]
-  followings: string[]
   groups: string[]
   desc: string
   country: string
   city: string
   from: string
   createdAt: string
-  relationship: Number
   _id: string
 }
 export type User = Partial<IUser> | null
@@ -102,6 +99,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   )
 }
 
+export default AuthProvider
 export const useAuthState = () => useContext(StateContext)
 export const useAuthDispatch: () => Dispatch = () =>
   useContext(DispatchContext)

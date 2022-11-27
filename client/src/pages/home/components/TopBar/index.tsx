@@ -1,3 +1,4 @@
+import './style.scss'
 import { Link } from 'react-router-dom'
 import { Modal } from 'antd'
 import type { FC } from 'react'
@@ -5,10 +6,9 @@ import { useState } from 'react'
 import type { Count, User } from '../../types'
 import { useGet } from '~/hooks/useFetch'
 import { useAuthState } from '~/context/AuthContext'
-import './style.scss'
 import RecommendUser from '~/pages/home/components/RecommendUser'
 import { axiosGet } from '~/utils/http'
-import { useLikesState } from '~/context/LikesContext'
+import { useRelationshipState } from '~/context/RelationshipContext'
 const TopBar: FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [following, setFollowing] = useState<User[]>([])
@@ -16,15 +16,14 @@ const TopBar: FC = () => {
   const [error, setError] = useState('')
   const [modelTitle, setModelTitle] = useState('')
   const { user } = useAuthState()
-  const { likes } = useLikesState()
-
+  const { likes, followers: followersCount, followings: followingsCount } = useRelationshipState()
   const { data: posts } = useGet<Count>('/post/count/')
   const showModal = async (e: any, type: string) => {
     setIsModalOpen(true)
     setLoading(true)
     setModelTitle(type)
     try {
-      const data = await axiosGet<User[]>(`/user/${user?._id}/${type}`)
+      const data = await axiosGet<User[]>(`/relationship/${type}/${user!._id}`)
       setFollowing(data)
     }
     catch (error: any) {
@@ -58,15 +57,15 @@ const TopBar: FC = () => {
                 </Link>
               </li>
               <li className="px-4 py-3 text-center border-b-2 border-transparent border-solid hover:border-teal">
-                <div onClick={e => showModal(e, 'following')} className="no-underline cursor-pointer text-grey-darker">
+                <div onClick={e => showModal(e, 'followings')} className="no-underline cursor-pointer text-grey-darker">
                   <div className="mb-1 text-sm font-bold tracking-tight">Following</div>
-                  <div className="text-lg font-bold tracking-tight hover:text-teal">{user?.followings!.length}</div>
+                  <div className="text-lg font-bold tracking-tight hover:text-teal">{followingsCount}</div>
                 </div>
               </li>
               <li className="px-4 py-3 text-center border-b-2 border-transparent border-solid hover:border-teal">
                 <div onClick={e => showModal(e, 'followers')} className="no-underline cursor-pointer text-grey-darker ">
                   <div className="mb-1 text-sm font-bold tracking-tight">Followers</div>
-                  <div className="text-lg font-bold tracking-tight hover:text-teal">{user?.followers!.length}</div>
+                  <div className="text-lg font-bold tracking-tight hover:text-teal">{followersCount}</div>
                 </div>
               </li>
               <li className="px-4 py-3 text-center border-b-2 border-transparent border-solid hover:border-teal">
@@ -88,7 +87,7 @@ const TopBar: FC = () => {
             ? ('Loading...')
             : error || (
               following && following.map(user => (
-                <RecommendUser key={user._id} user={user}></RecommendUser>
+                <RecommendUser key={user._id} user={user} isFollowing={modelTitle === 'followers' ? !!user?.isFollowing : true}></RecommendUser>
               ))
             )
           }

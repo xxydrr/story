@@ -36,9 +36,10 @@ export const getLikesCount = async (ctx: Context) => {
 
 // 用户收获的所有点赞数
 export const getLikesCountByUser = async (ctx: Context) => {
+  // const userId = ctx.params.id
   const { id } = ctx.state.user
   const likes = await Like.find({ userId: id }).countDocuments()
-  ctx.responseSuccess({ count: likes })
+  ctx.responseSuccess(likes)
 }
 
 // get user is liked a post

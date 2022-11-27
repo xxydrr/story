@@ -9,12 +9,9 @@ export interface IUser extends Document {
   avatar?: string
   isAdmin?: boolean
   roles?: string[]
-  followers?: string[]
-  followings?: string[]
   desc?: string
   country?: string
   city?: string
-  relationship?: Number
   createdAt?: Date
   updatedAt?: Date
   _doc: any
@@ -55,14 +52,6 @@ const userSchema = new Schema<IUser>({
     default: false,
   },
   roles: {
-    type: Array,
-    default: [],
-  },
-  followers: {
-    type: Array,
-    default: [],
-  },
-  followings: {
     type: Array,
     default: [],
   },

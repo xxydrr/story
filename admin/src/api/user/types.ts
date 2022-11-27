@@ -17,8 +17,6 @@ export interface UserInfo {
   username: string
   email: string
   phone: string
-  followers: number
-  followings: number
   roles: string[]
   desc: string
   country: string

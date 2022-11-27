@@ -1,5 +1,5 @@
 import Router from 'koa-router'
-import { createPost, deletePost, getLatestPosts, getPosts, getPostsCount, getTimelinePosts, updatePost } from '~/controllers/post'
+import { createPost, deletePost, getLatestPosts, getPosts, getPostsCount, updatePost } from '~/controllers/post'
 import { authJwt } from '~/utils/auth'
 
 const router = new Router()
@@ -10,6 +10,5 @@ const router = new Router()
   .delete('/:id', authJwt, deletePost)
   .get('/:username/profile', authJwt, getPosts)
   .get('/count', authJwt, getPostsCount)
-  .get('/timeline/:id', getTimelinePosts)
 
 export default router
