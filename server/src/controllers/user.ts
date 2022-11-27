@@ -50,9 +50,9 @@ export const getUsers = async (ctx: Context) => {
   const users = await User.find({ username: { $regex: username } }).limit(Number(limit)).skip(Number(limit) * (Number(page) - 1))
   const usersInfo: Exclude<IUser, 'password' | 'updatedAt'>[] = users.map((user) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { password, updatedAt, followers, followings, ...other } = user!._doc
+    const { password, updatedAt, ...other } = user!._doc
 
-    return { ...other, following: followings.length, followers: followers.length }
+    return other
   })
   ctx.responseSuccess({ result: usersInfo, total: users.length })
 }

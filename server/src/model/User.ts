@@ -53,7 +53,7 @@ const userSchema = new Schema<IUser>({
   },
   roles: {
     type: Array,
-    default: [],
+    default: ['user'],
   },
   desc: {
     type: String,
