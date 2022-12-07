@@ -38,7 +38,7 @@ const Login: FC = () => {
   return (
     <div className="flex items-center justify-center min-h-screen p-4 bg-gray-100">
       <div
-        className="w-1/2 bg-white rounded-md shadow-lg"
+        className="w-3/4 bg-white rounded-md shadow-lg lg:w-1/2"
       >
         <div className="flex flex-col items-center p-5 bg-white md:flex-1">
           <h3 className="my-4 text-2xl font-semibold text-gray-700">Account Login</h3>
