@@ -84,7 +84,7 @@ const Share: FC<ShareProps> = ({ change }) => {
             id="imgfile"
             onChange={e => setFile(e.target.files![0])}
             className="hidden"
-            accept="image/png, image/jpeg, image/jpg"
+            accept="image/png, image/jpeg, image/jpg,image/gif,image/webp"
           />
 
         </div>
